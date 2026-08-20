@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FAZZ STORE</title>
+
+<style>
+*{
+ box-sizing:border-box;
+ font-family:Arial,sans-serif;
+}
+
+body{
+ margin:0;
+ background:#080b14;
+ color:white;
+}
+
+header{
+ background:linear-gradient(135deg,#2563eb,#7c3aed);
+ text-align:center;
+ padding-bottom:18px;
+ box-shadow:0 4px 20px #0006;
+}
+
+.store-banner{
+ width:100%;
+ max-width:650px;
+ height:180px;
+ object-fit:cover;
+ display:block;
+ margin:0 auto 12px;
+ border-radius:0 0 18px 18px;
+}
+
+header h1{
+ margin:0;
+ font-size:28px;
+}
+
+header p{
+ margin:6px 0 0;
+ color:#ddd;
+}
+
+main{
+ max-width:650px;
+ margin:auto;
+ padding:18px 15px 90px;
+}
+
+.page{
+ display:none;
+}
+
+.page.active{
+ display:block;
+}
+
+.card{
+ background:#151a29;
+ padding:18px;
+ border-radius:18px;
+ margin-bottom:15px;
+ box-shadow:0 5px 20px #0003;
+}
+
+.hero{
+ padding:25px 20px;
+ border-radius:20px;
+ background:linear-gradient(135deg,#1d4ed8,#6d28d9);
+ margin-bottom:16px;
+}
+
+.hero h2{
+ margin:0 0 8px;
+ font-size:27px;
+}
+
+.hero p{
+ color:#ddd;
+}
+
+.games{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px;
+}
+
+.game{
+ background:#252c3d;
+ padding:18px 8px;
+ border-radius:15px;
+ text-align:center;
+ cursor:pointer;
+ border:2px solid transparent;
+ transition:.2s;
+}
+
+.game:hover{
+ transform:translateY(-2px);
+}
+
+.game.active{
+ border-color:#3b82f6;
+ background:#1e3a8a;
+}
+
+.game .icon{
+ font-size:35px;
+ height:55px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+.game b{
+ display:block;
+ margin-top:6px;
+}
+
+label{
+ display:block;
+ margin:13px 0 7px;
+ color:#cbd5e1;
+}
+
+input,select{
+ width:100%;
+ padding:13px;
+ border:0;
+ outline:0;
+ border-radius:12px;
+ background:#252c3d;
+ color:#fff;
+}
+
+.dm,.payments{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px;
+}
+
+.nominal,.payment{
+ background:#252c3d;
+ padding:14px;
+ border-radius:13px;
+ cursor:pointer;
+ border:2px solid transparent;
+ text-align:center;
+}
+
+.nominal.active{
+ border-color:#8b5cf6;
+ background:#312e81;
+}
+
+.payment.active{
+ border-color:#22c55e;
+ background:#14532d;
+}
+
+.nominal b{
+ display:block;
+ margin-bottom:5px;
+}
+
+.price{
+ font-size:23px;
+ font-weight:bold;
+ margin:15px 0;
+}
+
+.btn{
+ width:100%;
+ border:0;
+ padding:15px;
+ border-radius:13px;
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+ margin-top:12px;
+}
+
+.primary{
+ background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+.green{
+ background:#16a34a;
+}
+
+.red{
+ background:#dc2626;
+}
+
+.order{
+ background:#252c3d;
+ padding:14px;
+ border-radius:13px;
+ margin-bottom:10px;
+ line-height:1.7;
+}
+
+.badge{
+ display:inline-block;
+ padding:4px 9px;
+ border-radius:20px;
+ background:#14532d;
+ color:#86efac;
+ font-size:12px;
+}
+
+.empty{
+ text-align:center;
+ padding:35px 10px;
+ color:#9ca3af;
+}
+
+nav{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:#111827;
+ display:flex;
+ justify-content:space-around;
+ padding:10px 4px;
+ z-index:20;
+ border-top:1px solid #263044;
+}
+
+nav button{
+ background:none;
+ border:0;
+ color:#9ca3af;
+ font-size:12px;
+ cursor:pointer;
+}
+
+nav button span{
+ display:block;
+ font-size:20px;
+ margin-bottom:3px;
+}
+
+nav button.active{
+ color:#60a5fa;
+}
+
+.toast{
+ position:fixed;
+ top:75px;
+ left:50%;
+ transform:translateX(-50%);
+ background:#16a34a;
+ padding:13px 18px;
+ border-radius:12px;
+ display:none;
+ z-index:50;
+ box-shadow:0 5px 20px #0007;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<img
+ src="https://i.ibb.co.com/q3yGNfrS/7fb7530653c6424733eaaecc8886c014.jpg"
+ alt="FAZZ STORE Banner"
+ class="store-banner"
+>
+
+<h1>⚡ FAZZ STORE</h1>
+
+<p>Top Up Game Cepat & Mudah</p>
+
+</header>
+
+<div id="toast" class="toast"></div>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+<div class="hero">
+
+<h2>Top Up Game 🎮</h2>
+
+<p>FF • ML • PUBG • COC</p>
+
+<button class="btn primary"
+onclick="openPage('topup')">
+
+🚀 Top Up Sekarang
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>🔥 Game Populer</h2>
+
+<div class="games">
+
+<div class="game"
+onclick="selectGame('Free Fire');openPage('topup')">
+
+<div class="icon">🔥</div>
+
+<b>Free Fire</b>
+
+</div>
+
+
+<div class="game"
+onclick="selectGame('Mobile Legends');openPage('topup')">
+
+<div class="icon">⚔️</div>
+
+<b>Mobile Legends</b>
+
+</div>
+
+
+<div class="game"
+onclick="selectGame('PUBG Mobile');openPage('topup')">
+
+<div class="icon">🔫</div>
+
+<b>PUBG Mobile</b>
+
+</div>
+
+
+<div class="game"
+onclick="selectGame('Clash of Clans');openPage('topup')">
+
+<div class="icon">🏰</div>
+
+<b>Clash of Clans</b>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>⚡ Keunggulan</h2>
+
+<p>🚀 Proses cepat</p>
+<p>🔒 Data pesanan tersimpan</p>
+<p>💎 Banyak pilihan nominal</p>
+<p>📱 Nyaman di HP</p>
+
+</div>
+
+</section>
+
+
+<!-- TOP UP -->
+<section id="topup" class="page">
+
+<div class="card">
+
+<h2>🎮 Top Up</h2>
+
+<label>Pilih Game</label>
+
+<div class="games">
+
+<div id="g-ff"
+class="game"
+onclick="selectGame('Free Fire')">
+
+<div class="icon">🔥</div>
+<b>Free Fire</b>
+
+</div>
+
+
+<div id="g-ml"
+class="game"
+onclick="selectGame('Mobile Legends')">
+
+<div class="icon">⚔️</div>
+<b>Mobile Legends</b>
+
+</div>
+
+
+<div id="g-pubg"
+class="game"
+onclick="selectGame('PUBG Mobile')">
+
+<div class="icon">🔫</div>
+<b>PUBG Mobile</b>
+
+</div>
+
+
+<div id="g-coc"
+class="game"
+onclick="selectGame('Clash of Clans')">
+
+<div class="icon">🏰</div>
+<b>Clash of Clans</b>
+
+</div>
+
+</div>
+
+
+<label>ID Player</label>
+
+<input
+ id="player"
+ placeholder="Masukkan ID Player"
+>
+
+
+<label>Server / Zone ID</label>
+
+<input
+ id="server"
+ placeholder="Kosongkan jika tidak diperlukan"
+>
+
+
+<label>💎 Pilih Nominal</label>
+
+<div id="dm" class="dm"></div>
+
+
+<label>💳 Metode Pembayaran</label>
+
+<div class="payments">
+
+<div class="payment active"
+onclick="payment(this,'DANA')">
+
+💙 DANA
+
+</div>
+
+<div class="payment"
+onclick="payment(this,'GoPay')">
+
+💚 GoPay
+
+</div>
+
+<div class="payment"
+onclick="payment(this,'OVO')">
+
+💜 OVO
+
+</div>
+
+<div class="payment"
+onclick="payment(this,'QRIS')">
+
+📱 QRIS
+
+</div>
+
+</div>
+
+
+<div class="price" id="price">
+
+Rp0
+
+</div>
+
+
+<button
+class="btn primary"
+onclick="addCart()">
+
+🛒 Tambahkan ke Keranjang
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CART -->
+<section id="cart" class="page">
+
+<div class="card">
+
+<h2>🛒 Keranjang</h2>
+
+<div id="cartList"></div>
+
+<div class="price" id="total">
+
+Total: Rp0
+
+</div>
+
+<button
+class="btn green"
+onclick="checkout()">
+
+💳 Checkout
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ORDERS -->
+<section id="orders" class="page">
+
+<div class="card">
+
+<h2>🧾 Riwayat Pesanan</h2>
+
+<input
+id="search"
+placeholder="🔎 Cari pesanan..."
+oninput="renderOrders"
+>
+
+<br><br>
+
+<div id="orderList"></div>
+
+<button
+class="btn red"
+onclick="clearOrders()">
+
+🗑️ Hapus Riwayat
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="page">
+
+<div class="card">
+
+<h2>👤 Profil</h2>
+
+<label>Nama</label>
+
+<input
+id="name"
+placeholder="Nama kamu"
+>
+
+
+<label>No. WhatsApp</label>
+
+<input
+id="phone"
+placeholder="08xxxxxxxxxx"
+>
+
+
+<button
+class="btn primary"
+onclick="saveProfile()">
+
+💾 Simpan Profil
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>ℹ️ FAZZ STORE</h2>
+
+<p>Website top-up game versi demo.</p>
+
+<p>© 2026 FAZZ STORE</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<nav>
+
+<button
+class="active"
+onclick="openPage('home',this)">
+
+<span>🏠</span>
+Home
+
+</button>
+
+
+<button
+onclick="openPage('topup',this)">
+
+<span>🎮</span>
+Top Up
+
+</button>
+
+
+<button
+onclick="openPage('cart',this)">
+
+<span>🛒</span>
+Keranjang
+
+</button>
+
+
+<button
+onclick="openPage('orders',this)">
+
+<span>🧾</span>
+Pesanan
+
+</button>
+
+
+<button
+onclick="openPage('profile',this)">
+
+<span>👤</span>
+Profil
+
+</button>
+
+</nav>
+
+
+<script>
+
+const data={
+
+"Free Fire":[
+["💎 70 DM","10000"],
+["💎 140 DM","20000"],
+["💎 355 DM","50000"],
+["💎 720 DM","100000"]
+],
+
+"Mobile Legends":[
+["💎 86 DM","20000"],
+["💎 172 DM","40000"],
+["💎 257 DM","60000"],
+["💎 344 DM","80000"]
+],
+
+"PUBG Mobile":[
+["🪙 60 UC","15000"],
+["🪙 325 UC","75000"],
+["🪙 660 UC","150000"],
+["🪙 1800 UC","400000"]
+],
+
+"Clash of Clans":[
+["💎 80 Gems","15000"],
+["💎 500 Gems","50000"],
+["💎 1200 Gems","100000"],
+["💎 2500 Gems","200000"]
+]
+
+};
+
+
+let selectedGame="Free Fire";
+let selectedDM="";
+let selectedPrice=0;
+let selectedPayment="DANA";
+
+
+let cart=JSON.parse(
+localStorage.getItem("fazz_cart")||"[]"
+);
+
+
+let orders=JSON.parse(
+localStorage.getItem("fazz_orders")||"[]"
+);
+
+
+function rupiah(n){
+
+return "Rp"+
+Number(n).toLocaleString("id-ID");
+
+}
+
+
+function openPage(page,button){
+
+document.querySelectorAll(".page")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(page)
+.classList.add("active");
+
+
+if(button){
+
+document.querySelectorAll("nav button")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+}
+
+
+if(page==="cart")
+renderCart();
+
+if(page==="orders")
+renderOrders();
+
+window.scrollTo(0,0);
+
+}
+
+
+function selectGame(game){
+
+selectedGame=game;
+
+selectedDM="";
+selectedPrice=0;
+
+
+document.querySelectorAll(".game")
+.forEach(x=>x.classList.remove("active"));
+
+
+const ids={
+
+"Free Fire":"g-ff",
+"Mobile Legends":"g-ml",
+"PUBG Mobile":"g-pubg",
+"Clash of Clans":"g-coc"
+
+};
+
+
+const el=document.getElementById(ids[game]);
+
+if(el)
+el.classList.add("active");
+
+
+renderDM();
+
+document.getElementById("price")
+.textContent="Rp0";
+
+}
+
+
+function renderDM(){
+
+const box=document.getElementById("dm");
+
+box.innerHTML="";
+
+
+data[selectedGame].forEach(item=>{
+
+const d=document.createElement("div");
+
+d.className="nominal";
+
+d.innerHTML=
+"<b>"+item[0]+"</b>"+
+rupiah(item[1]);
+
+
+d.onclick=()=>{
+
+document.querySelectorAll(".nominal")
+.forEach(x=>x.classList.remove("active"));
+
+
+d.classList.add("active");
+
+
+selectedDM=item[0];
+
+selectedPrice=Number(item[1]);
+
+
+document.getElementById("price")
+.textContent=rupiah(selectedPrice);
+
+};
+
+
+box.appendChild(d);
+
+});
+
+}
+
+
+function payment(el,name){
+
+document.querySelectorAll(".payment")
+.forEach(x=>x.classList.remove("active"));
+
+el.classList.add("active");
+
+selectedPayment=name;
+
+}
+
+
+function addCart(){
+
+const player=
+document.getElementById("player")
+.value.trim();
+
+
+const server=
+document.getElementById("server")
+.value.trim();
+
+
+if(!player){
+
+alert("Masukkan ID Player dulu 😹");
+
+return;
+
+}
+
+
+if(!selectedDM){
+
+alert("Pilih nominal dulu 😹");
+
+return;
+
+}
+
+
+cart.push({
+
+game:selectedGame,
+player:player,
+server:server,
+dm:selectedDM,
+price:selectedPrice,
+payment:selectedPayment
+
+});
+
+
+localStorage.setItem(
+"fazz_cart",
+JSON.stringify(cart)
+);
+
+
+toast("✅ Ditambahkan ke keranjang!");
+
+renderCart();
+
+}
+
+
+function renderCart(){
+
+const box=
+document.getElementById("cartList");
+
+const total=
+document.getElementById("total");
+
+
+if(cart.length===0){
+
+box.innerHTML=
+'<div class="empty">🛒 Keranjang kosong</div>';
+
+total.textContent="Total: Rp0";
+
+return;
+
+}
+
+
+let sum=0;
+
+
+box.innerHTML=cart.map((x,i)=>{
+
+sum+=x.price;
+
+
+return `
+
+<div class="order">
+
+<b>${x.game}</b><br>
+
+💎 ${x.dm}<br>
+
+🆔 ID: ${x.player}<br>
+
+💳 ${x.payment}<br>
+
+💰 ${rupiah(x.price)}
+
+<button
+class="btn red"
+onclick="removeCart(${i})">
+
+Hapus
+
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+
+total.textContent=
+"Total: "+rupiah(sum);
+
+}
+
+
+function removeCart(i){
+
+cart.splice(i,1);
+
+
+localStorage.setItem(
+"fazz_cart",
+JSON.stringify(cart)
+);
+
+
+renderCart();
+
+}
+
+
+function checkout(){
+
+if(cart.length===0){
+
+alert("Keranjang masih kosong 😹");
+
+return;
+
+}
+
+
+const now=new Date();
+
+
+cart.forEach(x=>{
+
+orders.unshift({
+
+...x,
+
+id:
+"FZ"+
+Date.now()+
+Math.floor(Math.random()*999),
+
+date:
+now.toLocaleString("id-ID"),
+
+status:
+"Menunggu Pembayaran"
+
+});
+
+});
+
+
+localStorage.setItem(
+"fazz_orders",
+JSON.stringify(orders)
+);
+
+
+cart=[];
+
+
+localStorage.setItem(
+"fazz_cart",
+"[]"
+);
+
+
+toast("✅ Pesanan berhasil dibuat!");
+
+
+renderCart();
+renderOrders();
+
+
+openPage("orders");
+
+}
+
+
+function renderOrders(){
+
+const box=
+document.getElementById("orderList");
+
+
+const search=
+(document.getElementById("search")?.value||"")
+.toLowerCase();
+
+
+const filtered=
+orders.filter(x=>
+(x.game+" "+x.player+" "+x.id)
+.toLowerCase()
+.includes(search)
+);
+
+
+if(filtered.length===0){
+
+box.innerHTML=
+'<div class="empty">🧾 Belum ada pesanan</div>';
+
+return;
+
+}
+
+
+box.innerHTML=
+filtered.map(x=>`
+
+<div class="order">
+
+<b>${x.game}</b>
+
+<span class="badge">
+${x.status}
+</span>
+
+<br>
+
+💎 ${x.dm}<br>
+
+🆔 ID: ${x.player}<br>
+
+💳 ${x.payment}<br>
+
+💰 ${rupiah(x.price)}<br>
+
+🧾 Order: ${x.id}<br>
+
+🕒 ${x.date}
+
+</div>
+
+`).join("");
+
+}
+
+
+function clearOrders(){
+
+if(!confirm("Hapus semua riwayat?"))
+return;
+
+
+orders=[];
+
+
+localStorage.setItem(
+"fazz_orders",
+"[]"
+);
+
+
+renderOrders();
+
+}
+
+
+function saveProfile(){
+
+const name=
+document.getElementById("name").value;
+
+
+const phone=
+document.getElementById("phone").value;
+
+
+localStorage.setItem(
+
+"fazz_profile",
+
+JSON.stringify({
+name:name,
+phone:phone
+})
+
+);
+
+
+toast("✅ Profil tersimpan!");
+
+}
+
+
+function loadProfile(){
+
+const p=JSON.parse(
+localStorage.getItem("fazz_profile")||"{}"
+);
+
+
+document.getElementById("name")
+.value=p.name||"";
+
+
+document.getElementById("phone")
+.value=p.phone||"";
+
+}
+
+
+function toast(text){
+
+const t=
+document.getElementById("toast");
+
+
+t.textContent=text;
+
+t.style.display="block";
+
+
+setTimeout(()=>{
+
+t.style.display="none";
+
+},2200);
+
+}
+
+
+selectGame("Free Fire");
+
+loadProfile();
+
+renderCart();
+
+renderOrders();
+
+</script>
+
+</body>
+</html>
